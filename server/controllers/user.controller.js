@@ -30,6 +30,7 @@ module.exports = {
                         userToken,
                         { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 }) //sets to 72million seconds for cookie age
                     .json(newUser) //succesful creation of user and cookie
+
             }
         }
         catch (err) { //bad request
@@ -48,7 +49,11 @@ module.exports = {
                     //generate the userToken
                     const userToken = jwt.sign({ _id: user._id, email: user.email }, secret, { expiresIn: '2h' })
                     //log the user in
-                    res.status(201).cookie('userToken', userToken, { httpOnly: true, maxAge: 2 * 60 * 60 * 1000 }).json(user)
+                    // res.cookie('userToken', userToken)
+                    
+                    
+                    console.log("test")
+                    
                 }
                 else { //passwords don't match but email does
                     res.status(400).json({ message: "Invalid email/password combination" })
@@ -79,6 +84,10 @@ module.exports = {
                 console.log("Get Logged In User: ", err);
                 res.status(400).json(err)
             })
+    },
+
+    getUser: (req, res) => {
+        res.json({ _id: "Hello World" })
     }
 
 }

@@ -1,19 +1,13 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import Register from './components/Register';
-import Islogged from './components/Islogged';
+import React, { useState } from 'react';
+import ProductList from './components/ProductList';
 
 function App() {
+  const [products, setProducts] = useState([]);
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/loggedin" element={<Islogged />} />
-        </Routes>
-      </BrowserRouter>
+      <ProductList products={products} setProducts={setProducts} />
+
     </div>
   );
 }
